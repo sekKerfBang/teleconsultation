@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from utilisateur.views import CustomLoginView
 
 urlpatterns = [
-        path('', CustomLoginView.as_view(), name='home'),  # Page d'accueil redirigée vers login
+    path('', CustomLoginView.as_view(), name='home'),  # Page d'accueil redirigée vers login
     path('admin/', admin.site.urls),
     path('accounts/',include('utilisateur.urls')),
 ]

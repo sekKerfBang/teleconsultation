@@ -136,8 +136,8 @@ def doctor_dashboard(request):
     return render(request, 'idea/doctor_dashboard.html', {'consultations': consultations})
 
 @login_required
-def update_consultation_status(request, pk, status):
-    consultation = get_object_or_404(Consultation, id=pk)
+def update_consultation_status(request, consultation_id, status):
+    consultation = get_object_or_404(Consultation, id=consultation_id)
 
     # Vérification : seul le patient ou le médecin concerné peut agir
     if not (request.user == consultation.patient.user or request.user == consultation.doctor.user):
