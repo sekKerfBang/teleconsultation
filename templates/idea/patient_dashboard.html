@@ -26,6 +26,15 @@
                                     <td class="p-3 border">{{ consultation.date|date:'d/m/Y H:i' }}</td>
                                     <td class="p-3 border">{{ consultation.doctor.user.username }}</td>
                                     <td class="p-3 border">{{ consultation.status }}</td>
+                                    <td class="p-3 border">
+                                        {% if consultation.status == 'pending' %}
+                                            <span>En attente</span>
+                                        {% elif consultation.status == 'in_progress' %}
+                                            <a href="{{ consultation.video_link }}" target="_blank" class="btn btn-success btn-sm">Rejoindre</a>
+                                        {% elif consultation.status == 'completed' %}
+                                            <span class="text-gray-500">Terminée</span>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                             {% empty %}
                                 <tr><td colspan="3" class="p-3 border">Aucune consultation pour le moment.</td></tr>

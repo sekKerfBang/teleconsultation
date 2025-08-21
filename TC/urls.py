@@ -18,10 +18,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-# from utilisateur.views import home
+from utilisateur.views import CustomLoginView
 
 urlpatterns = [
-    # path('', home, name='home'),
+        path('', CustomLoginView.as_view(), name='home'),  # Page d'accueil redirigée vers login
     path('admin/', admin.site.urls),
     path('accounts/',include('utilisateur.urls')),
 ]

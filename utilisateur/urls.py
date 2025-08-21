@@ -9,7 +9,6 @@ from .views import (
 app_name = 'utilisateur'
 
 urlpatterns = [
-    path('', CustomLoginView.as_view(), name='home'),  # Page d'accueil redirigée vers login
     path('login/', CustomLoginView.as_view(), name='login'),
     path('register/patient/', register_patient, name='register_patient'),
     path('register/doctor/', register_doctor, name='register_doctor'),
