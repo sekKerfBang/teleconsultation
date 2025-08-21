@@ -50,7 +50,7 @@ class CustomLoginView(LoginView):
             user = authenticate(self.request, username = username , password = password)
             if user is not None:
                 login(self.request, user)
-                messages.info(self.request, f"Bienvenue, {user.username} 👋")
+                messages.success(self.request, f"Bienvenue, {user.username} 👋")
                 return redirect(self.get_success_url())
     
     def form_invalid(self, form):
@@ -91,7 +91,7 @@ def register_patient(request):
             messages.success(request, "Inscription réussie ! Veuillez vous connecter.")
             return redirect('utilisateur:login')
         else:
-            messages.info(request, "Inscription non reussi, veuillez recommencez  ")
+            messages.success(request, "Inscription non reussi, veuillez recommencez  ")
     else:
         form = PatientRegistrationForm()
     return render(request, 'idea/register_patient.html', {'form': form})
@@ -114,7 +114,7 @@ def register_doctor(request):
 # Déconnexion
 def custom_logout(request):
     logout(request)
-    messages.info(request, "Vous avez été déconnecté avec succès.")
+    messages.success(request, "Vous avez été déconnecté avec succès.")
     return redirect('utilisateur:login')
 
 # Tableau de bord patient
