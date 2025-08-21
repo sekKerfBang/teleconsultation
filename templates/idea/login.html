@@ -1,0 +1,139 @@
+{% extends './base.html' %}
+
+{% block title %}Connexion - TConsultGuinee{% endblock %}
+
+{% block content %}
+<section class="banner-section d-flex align-items-center min-vh-100" style="background: linear-gradient(135deg, #0f172a, #1e293b);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card p-5 shadow-lg border-0 position-relative" style="border-radius: 10px; background-color: #ffffff; z-index: 10;">
+                    <h2 class="text-center mb-4" style="color: #1e293b;">Connexion</h2>
+                   
+                    {% comment %} {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" >{{ message }}</div>
+                    {% endfor %}
+
+                {% endif %} {% endcomment %}
+
+                    <!-- Formulaire -->
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        <!-- Username -->
+                        <div class="mb-3">
+                            {{ form.username.label_tag }}
+                            {{ form.username }}
+                            {% if form.username.errors %}
+                                <div class="text-danger fs-7 mt-1">{{ form.username.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-3 position-relative">
+                            {{ form.password.label_tag }}
+                            {{ form.password}}
+                            {% if form.password.errors %}
+                                <div class="text-danger fs-7 mt-1">{{ form.password.errors }}</div>
+                            {% endif %}
+                            <span onclick="togglePassword()" style="position:absolute; right:15px; top:50%; transform: translateY(-50%); cursor:pointer; z-index: 20;">
+                                <iconify-icon icon="mdi:eye-outline"></iconify-icon>
+                            </span>
+                        </div>
+
+                        <!-- Bouton -->
+                        <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+                    </form>
+
+                    <!-- Liens -->
+                    <p class="mt-3 text-center">
+                        <a href="{% url 'utilisateur:password_reset' %}" style="color: #0ea5e9;">Mot de passe oublié ?</a>
+                    </p>
+                    <p class="mt-2 text-center fs-7">
+                        Pas encore de compte ? 
+                        <a href="{% url 'utilisateur:register_patient' %}" style="color: #0ea5e9;">S'inscrire en tant que patient</a> | 
+                        <a href="{% url 'utilisateur:register_doctor' %}" style="color: #0ea5e9;">S'inscrire en tant que médecin</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+function togglePassword() {
+    var x = document.getElementById("id_password");
+    if (x) {
+        x.type = (x.type === "password") ? "text" : "password";
+    }
+}
+</script>
+{% endblock %}
+
+{% comment %} {% extends './base.html' %}
+
+
+{% block title %}Connexion - TConsultGuinee{% endblock %}
+
+{% block content %}
+<section class="banner-section position-relative d-flex align-items-center min-vh-100" style="background: linear-gradient(135deg, #0f172a, #1e293b);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card p-5 shadow-lg border-0" style="border-radius: 10px; background-color: #ffffff;">
+                    <h2 class="text-center mb-4" style="color: #1e293b;">Connexion</h2>
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            {{ form.username.label_tag }}
+                            {{ form.username }}
+                            {% if form.username.errors %}
+                                <div class="text-danger fs-7 mt-1">{{ form.username.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3 position-relative">
+                            {{ form.password.label_tag }}
+                            {{ form.password }}
+                            {% if form.password.errors %}
+                                <div class="text-danger fs-7 mt-1">{{ form.password.errors }}</div>
+                            {% endif %}
+                            <span onclick="togglePassword()" style="position:absolute; right:10px; top:40%; cursor:pointer;">
+                                <iconify-icon icon="mdi:eye-outline"></iconify-icon>
+                            </span>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+                    </form>
+
+                    <p class="mt-3 text-center">
+                        <a href="{% url 'utilisateur:password_reset' %}" style="color: #0ea5e9;">Mot de passe oublié ?</a>
+                    </p>
+
+                    <p class="mt-2 text-center fs-7">
+                        Pas encore de compte ? 
+                        <a href="{% url 'utilisateur:register_patient' %}" style="color: #0ea5e9;">S'inscrire en tant que patient</a> | 
+                        <a href="{% url 'utilisateur:register_doctor' %}" style="color: #0ea5e9;">S'inscrire en tant que médecin</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+function togglePassword() {
+    var x = document.getElementById("id_password");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+</script>
+{% endblock %} {% endcomment %}

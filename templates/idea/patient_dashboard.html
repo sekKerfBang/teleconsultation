@@ -1,0 +1,91 @@
+{% extends './base.html' %}
+{% load static %}
+{% block title %}Tableau de bord Patient - TConsultGuinee{% endblock %}
+{% block content %}
+    <section class="banner-section position-relative d-flex align-items-end min-vh-100">
+        <video class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" autoplay muted loop playsinline>
+            <source src="{% static './assets/images/backgrounds/banner-video.mp4' %}" type="video/mp4" />
+        </video>
+        <div class="container">
+            <div class="d-flex flex-column gap-4 pb-8 position-relative z-1">
+                <h2 class="text-2xl font-bold text-white mb-4">Bienvenue, {{ user.username }} (Patient)</h2>
+                <a href="{% url 'utilisateur:consultation_create' %}" class="btn btn-dark text-white fs-6 bg-dark px-3 py-2">Prendre un rendez-vous</a>
+                <h3 class="text-xl font-semibold text-white mb-4">Vos consultations</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse bg-white rounded-lg">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="p-3 border">Date</th>
+                                <th class="p-3 border">Médecin</th>
+                                <th class="p-3 border">Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for consultation in consultations %}
+                                <tr class="hover:bg-gray-100">
+                                    <td class="p-3 border">{{ consultation.date|date:'d/m/Y H:i' }}</td>
+                                    <td class="p-3 border">{{ consultation.doctor.user.username }}</td>
+                                    <td class="p-3 border">{{ consultation.status }}</td>
+                                </tr>
+                            {% empty %}
+                                <tr><td colspan="3" class="p-3 border">Aucune consultation pour le moment.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% comment %} {% extends './base.html' %}
+{%load static%}
+{% block title %}Tableau de bord Patient - TConsultGuinee{% endblock %}
+{% block content %}
+    <section class="banner-section position-relative d-flex align-items-end min-vh-100">
+        <video class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" autoplay muted loop playsinline>
+            <source src="{% static './assets/images/backgrounds/banner-video.mp4' %}" type="video/mp4" />
+        </video>
+        <div class="container">
+            <div class="d-flex flex-column gap-4 pb-8 position-relative z-1">
+                <h2 class="text-2xl font-bold text-white mb-4">Bienvenue, {{ user.username }} (Patient)</h2>
+                <a href="{% url 'utilisateur:consultation_create' %}" class="btn btn-dark text-white fs-6 bg-dark px-3 py-2">Prendre un rendez-vous</a>
+                <h3 class="text-xl font-semibold text-white mb-4">Vos consultations</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse bg-white rounded-lg">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="p-3 border">Date</th>
+                                <th class="p-3 border">Médecin</th>
+                                <th class="p-3 border">Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for consultation in consultations %}
+                                <tr class="hover:bg-gray-100">
+                                    <td class="p-3 border">{{ consultation.date|date:'d/m/Y H:i' }}</td>
+                                    <td class="p-3 border">{{ consultation.doctor }}</td>
+                                    <td class="p-3 border">{{ consultation.status }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% comment %} <!-- templates/patient_dashboard.html -->
+{% extends './base.html' %}
+{% block title %}Tableau de bord Patient{% endblock %}
+{% block content %}
+    <h2>Bienvenue, {{ user.username }} (Patient)</h2>
+    <a href="{% url 'utilisateur:consultation_create' %}">Prendre un rendez-vous</a>
+    <h3>Vos consultations</h3>
+    <table>
+        <tr><th>Date</th><th>Médecin</th><th>Statut</th></tr>
+        {% for consultation in consultations %}
+            <tr><td>{{ consultation.date }}</td><td>{{ consultation.doctor }}</td><td>{{ consultation.status }}</td></tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'utilisateur:logout' %}">Déconnexion</a>
+{% endblock %} {% endcomment %} 

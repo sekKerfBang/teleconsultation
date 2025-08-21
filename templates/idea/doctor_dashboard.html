@@ -1,0 +1,145 @@
+{% extends './base.html' %}
+{% load static %}
+{% block title %}Tableau de bord Médecin - TConsultGuinee{% endblock %}
+{% block content %}
+<section class="banner-section position-relative d-flex align-items-end min-vh-100">
+    <video class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" autoplay muted loop playsinline>
+        <source src="{% static './assets/images/backgrounds/banner-video.mp4' %}" type="video/mp4" />
+    </video>
+    <div class="container">
+        <div class="d-flex flex-column gap-4 pb-8 position-relative z-1">
+            <h2 class="text-2xl font-bold text-white mb-4">Bienvenue, Dr. {{ user.username }}</h2>
+            <h3 class="text-xl font-semibold text-white mb-4">Vos consultations à venir</h3>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse bg-white rounded-lg">
+                    <thead>
+                        <tr class="bg-gray-200">
+                            <th class="p-3 border">Date</th>
+                            <th class="p-3 border">Patient</th>
+                            <th class="p-3 border">Statut</th>
+                            <th class="p-3 border">Actions</th> </tr>
+                    </thead>
+                    <tbody>
+                        {% for consultation in consultations %}
+                            <tr class="hover:bg-gray-100">
+                                <td class="p-3 border">{{ consultation.date|date:'d/m/Y H:i' }}</td>
+                                <td class="p-3 border">{{ consultation.patient.user.username }}</td>
+                                <td class="p-3 border">{{ consultation.get_status_display }}</td> <td class="p-3 border">
+                                    {% if consultation.status == 'pending' %}
+                                        <form action="{% url 'utilisateur:update_consultation_status' consultation.id 'in_progress' %}" method="post" class="d-inline">
+                                            {% csrf_token %}
+                                            <button type="submit" 
+                                                    onclick="window.open('{{ consultation.video_link }}', '_blank');"
+                                                    class="btn btn-primary btn-sm">
+                                                Démarrer
+                                            </button>
+                                        </form>
+
+                                    {% elif consultation.status == 'in_progress' %}
+                                        <a href="{{ consultation.video_link }}" target="_blank" class="btn btn-success btn-sm me-2">Rejoindre</a>
+
+                                        <form action="{% url 'utilisateur:update_consultation_status' consultation.id 'completed' %}" method="post" class="d-inline">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger btn-sm">Terminer</button>
+                                        </form>
+
+                                    {% elif consultation.status == 'completed' %}
+                                        <span class="text-gray-500">Terminée</span>
+                                    
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr><td colspan="4" class="p-3 border text-center">Aucune consultation pour le moment.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+    {% comment %} <section class="banner-section position-relative d-flex align-items-end min-vh-100">
+        <video class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" autoplay muted loop playsinline>
+            <source src="{% static './assets/images/backgrounds/banner-video.mp4' %}" type="video/mp4" />
+        </video>
+        <div class="container">
+            <div class="d-flex flex-column gap-4 pb-8 position-relative z-1">
+                <h2 class="text-2xl font-bold text-white mb-4">Bienvenue, Dr. {{ user.username }}</h2>
+                <h3 class="text-xl font-semibold text-white mb-4">Vos consultations</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse bg-white rounded-lg">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="p-3 border">Date</th>
+                                <th class="p-3 border">Patient</th>
+                                <th class="p-3 border">Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for consultation in consultations %}
+                                <tr class="hover:bg-gray-100">
+                                    <td class="p-3 border">{{ consultation.date|date:'d/m/Y H:i' }}</td>
+                                    <td class="p-3 border">{{ consultation.patient.user.username }}</td>
+                                    <td class="p-3 border">{{ consultation.status }}</td>
+                                </tr>
+                            {% empty %}
+                                <tr><td colspan="3" class="p-3 border">Aucune consultation pour le moment.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section> {% endcomment %}
+{% endblock %}
+{% comment %} {% extends './base.html' %}
+{% block title %}Tableau de bord Médecin - TConsultGuinee{% endblock %}
+{% block content %}
+    <section class="banner-section position-relative d-flex align-items-end min-vh-100">
+        <video class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" autoplay muted loop playsinline>
+            <source src="{% static './assets/images/backgrounds/banner-video.mp4' %}" type="video/mp4" />
+        </video>
+        <div class="container">
+            <div class="d-flex flex-column gap-4 pb-8 position-relative z-1">
+                <h2 class="text-2xl font-bold text-white mb-4">Bienvenue, Dr. {{ user.username }}</h2>
+                <h3 class="text-xl font-semibold text-white mb-4">Vos consultations</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse bg-white rounded-lg">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="p-3 border">Date</th>
+                                <th class="p-3 border">Patient</th>
+                                <th class="p-3 border">Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for consultation in consultations %}
+                                <tr class="hover:bg-gray-100">
+                                    <td class="p-3 border">{{ consultation.date|date:'d/m/Y H:i' }}</td>
+                                    <td class="p-3 border">{{ consultation.patient }}</td>
+                                    <td class="p-3 border">{{ consultation.status }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% comment %} <!-- templates/doctor_dashboard.html -->
+{% extends './base.html' %}
+{% block title %}Tableau de bord Médecin{% endblock %}
+{% block content %}
+    <h2>Bienvenue, Dr. {{ user.username }}</h2>
+    <h3>Vos consultations</h3>
+    <table>
+        <tr><th>Date</th><th>Patient</th><th>Statut</th></tr>
+        {% for consultation in consultations %}
+            <tr><td>{{ consultation.date }}</td><td>{{ consultation.patient }}</td><td>{{ consultation.status }}</td></tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'logout' %}">Déconnexion</a>
+{% endblock %} {% endcomment %} 

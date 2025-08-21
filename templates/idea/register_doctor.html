@@ -1,0 +1,183 @@
+{% extends './base.html' %}
+{% block title %}Inscription Médecin{% endblock %}
+
+{% block content %}
+<section class="py-5" style="background: linear-gradient(135deg, #f0f8ff, #e6f2ff);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="card shadow-lg border-0 rounded-4 p-4" 
+                     style="background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px);">
+                    
+                    <h2 class="text-center mb-4 fw-bold text-primary">Inscription Médecin</h2>
+                    
+                    <form method="post" class="d-flex flex-column gap-3">
+                        {% csrf_token %}
+
+                        <!-- Nom d'utilisateur -->
+                        <div class="form-group">
+                            <label for="{{ form.username.id_for_label }}" class="fw-semibold">{{ form.username.label }}</label>
+                            {{ form.username }}
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="{{ form.email.id_for_label }}" class="fw-semibold">{{ form.email.label }}</label>
+                            {{ form.email }}
+                        </div>
+
+                        <!-- Passwords sur la même ligne -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="{{ form.password1.id_for_label }}" class="fw-semibold">{{ form.password1.label }}</label>
+                                {{ form.password1 }}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="{{ form.password2.id_for_label }}" class="fw-semibold">{{ form.password2.label }}</label>
+                                {{ form.password2 }}
+                            </div>
+                        </div>
+
+                        <!-- Specialty et License sur la même ligne -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="{{ form.specialty.id_for_label }}" class="fw-semibold">{{ form.specialty.label }}</label>
+                                {{ form.specialty }}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="{{ form.license_number.id_for_label }}" class="fw-semibold">{{ form.license_number.label }}</label>
+                                {{ form.license_number }}
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-2 rounded-pill shadow-sm mt-3">
+                            S'inscrire
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <p>Déjà inscrit ?
+                            <a href="{% url 'utilisateur:login' %}" class="text-primary fw-bold">Connectez-vous</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% comment %} {% extends './base.html' %}
+{% block title %}Inscription Médecin{% endblock %}
+
+{% block content %}
+    <section class="py-5" style="background: linear-gradient(135deg, #f0f8ff, #e6f2ff);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="card shadow-lg border-0 rounded-4 p-4" 
+                     style="background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px);">
+                    
+                    <h2 class="text-center mb-4 fw-bold text-primary">Inscription Médecin</h2>
+                    
+                    <form method="post" class="d-flex flex-column gap-3">
+                        {% csrf_token %}
+
+                        <!-- Nom d'utilisateur -->
+                        <div class="form-group">
+                            <label for="{{ form.username.id_for_label }}" class="fw-semibold">{{ form.username.label }}</label>
+                            {{ form.username }}
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="{{ form.email.id_for_label }}" class="fw-semibold">{{ form.email.label }}</label>
+                            {{ form.email }}
+                        </div>
+
+                        <!-- Passwords sur la même ligne -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="{{ form.password1.id_for_label }}" class="fw-semibold">{{ form.password1.label }}</label>
+                                {{ form.password1 }}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="{{ form.password2.id_for_label }}" class="fw-semibold">{{ form.password2.label }}</label>
+                                {{ form.password2 }}
+                            </div>
+                        </div>
+
+                        <!-- Special {% endcomment %}
+
+{% comment %} {% extends './base.html' %}
+{% block title %}Inscription Médecin{% endblock %}
+
+{% block content %}
+<section class="py-5" style="background: linear-gradient(135deg, #f0f8ff, #e6f2ff);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="card shadow-lg border-0 rounded-4 p-4" 
+                     style="background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px);">
+                    
+                    <h2 class="text-center mb-4 fw-bold text-primary">Inscription Médecin</h2>
+                    
+                    <form method="post" class="d-flex flex-column gap-3">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}" class="fw-semibold">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="text-danger small">{{ field.errors|striptags }}</div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        
+                        <button type="submit" class="btn btn-primary w-100 py-2 rounded-pill shadow-sm">
+                            S'inscrire
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <p>Déjà inscrit ?
+                            <a href="{% url 'utilisateur:login' %}" class="text-primary fw-bold">Connectez-vous</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% comment %} {% extends './base.html' %}
+{% block title %}Inscription Médecin{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="card shadow-sm border-0 rounded-4 p-4">
+                    <h2 class="text-center mb-4 fw-bold text-primary">Inscription Médecin</h2>
+                    <form method="post" class="d-flex flex-column gap-3">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary w-100 py-2">
+                            S'inscrire
+                        </button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>Déjà inscrit ?
+                            <a href="{% url 'utilisateur:login' %}" class="text-primary fw-bold">Connectez-vous</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} {% endcomment %}
+
+  
