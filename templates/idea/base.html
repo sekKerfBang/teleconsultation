@@ -6,10 +6,35 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}TConsultGuinee{% endblock %}</title>
-    <link rel="shortcut icon" type="image/png" href="{% static './assets/images/logos/favicon.svg' %}" />
+    <link rel="shortcut icon" type="image/png" href="{% static './assets/images/logos/heart.png' %}" />
     <link rel="stylesheet" href="{% static './assets/libs/owl.carousel/dist/assets/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static './assets/libs/aos-master/dist/aos.css' %}">
     <link rel="stylesheet" href="{% static './assets/css/styles.css' %}" />
+    <style>
+            #success-message {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1000;
+                background: rgb(39, 39, 217);
+                color: #fff;
+                font-weight: bolder;
+            }
+            #message-container .alert-success {
+                background: rgb(39, 39, 217);
+                color: #fff;
+                font-weight: bolder;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            }
+            #message-container .alert-danger {
+                background: #dc3545; /* Bootstrap default danger color */
+                color: #fff;
+                font-weight: bolder;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            }
+        </style>
 </head>
 
 <body>
@@ -153,7 +178,7 @@
         {% block content %}{% endblock %}
     </div>
 
-    <footer class="footer bg-dark py-5 py-lg-11 py-xl-12">
+    <footer class="footer bg-dark py-5 py-lg-2 py-xl-12">
         <div class="container">
             <div class="row">
                 <div class="col-xl-5 mb-8 mb-xl-0">
@@ -212,38 +237,3 @@
     </script>
 </body>
 </html>
-{% comment %} <!-- templates/base.html (base template with CSS and JS) -->
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Mon App{% endblock %}</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
-        .container { max-width: 800px; margin: 50px auto; padding: 20px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        form { display: flex; flex-direction: column; }
-        input, textarea, button { margin: 10px 0; padding: 10px; font-size: 16px; }
-        button { background: #007bff; color: white; border: none; cursor: pointer; }
-        button:hover { background: #0056b3; }
-        .dashboard { padding: 20px; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-    </style>
-    <script>
-        function togglePassword() {
-            var x = document.getElementById("password");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
-        }
-    </script>
-</head>
-<body>
-    <div class="container">
-        {% block content %}{% endblock %}
-    </div>
-</body>
-</html> {% endcomment %}

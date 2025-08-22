@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (
     CustomLoginView, register_patient, register_doctor, custom_logout,
-    patient_dashboard, doctor_dashboard, ConsultationListView, ConsultationCreateView,
+    patient_dashboard, doctor_dashboard, ConsultationCreateView,
     CustomPasswordResetView, CustomPasswordResetDoneView, CustomPasswordResetConfirmView,
     CustomPasswordResetCompleteView, about_us, update_consultation_status
 )
@@ -20,7 +20,7 @@ urlpatterns = [
     path('patient/dashboard/', patient_dashboard, name='patient_dashboard'),
     path('doctor/dashboard/', doctor_dashboard, name='doctor_dashboard'),
     path("consultations/<int:consultation_id>/status/<str:status>/", update_consultation_status, name="update_consultation_status"),
-    path('consultations/', ConsultationListView.as_view(), name='consultation_list'),
+    # path('consultations/', ConsultationListView.as_view(), name='consultation_list'),
     path('consultations/create/', ConsultationCreateView.as_view(), name='consultation_create'),
     path('about-us/', about_us, name='about_us'),
 ]
