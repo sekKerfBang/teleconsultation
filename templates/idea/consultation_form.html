@@ -2,89 +2,67 @@
 {% load static %}
 {% block title %}Créer une Consultation - TConsultGuinee{% endblock %}
 {% block content %}
-<section class="py-5" style="background: linear-gradient(135deg, #f0f8ff, #e6f2ff);">
-    <div class="container">
+<section class="min-vh-100 d-flex align-items-center justify-content-center position-relative" 
+         style="background: linear-gradient(135deg, #f0f8ff, #e6f2ff); overflow: hidden;">
+    
+    <!-- Image de fond -->
+    <img class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" src="{% static './assets/images/backgrounds/femme.jpg' %}" style="object-position: center; opacity: 0.4;"/>
+
+    <!-- Carte centrée -->
+    <div class="container position-relative">
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8">
-                <div class="card shadow-lg border-0 rounded-4 p-4" 
-                     style="background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px);">
+                <div class="card shadow-lg border-0 rounded-4 p-4"
+                     style="background: rgba(255, 255, 255, 0.896); backdrop-filter: blur(10px);">
                     
-                    <h2 class="text-center mb-4 fw-bold text-primary">Prendre un rendez - vous </h2>
-                    {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-danger" role="alert">{{ message }}</div>
-                    {% endfor %}
-                {% endif %}
+                    <h2 class="text-center mb-4 fw-bold text-primary">Prendre un rendez - vous</h2>
 
-                    
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger" role="alert">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+
                     <form method="POST" class="d-flex flex-column gap-3">
                         {% csrf_token %}
 
-                        <!-- Nom d'utilisateur -->
-                        
-                        <!-- Email -->
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="{{ form.doctor.id_for_label }}" class="fw-semibold">{{ form.doctor.label }}</label>
                                 {{ form.doctor }}
-                                <div class="text-danger"> {{form.doctor.errors }} </div>
-                                
+                                <div class="text-danger">{{ form.doctor.errors }}</div>
                             </div>
                             <div class="col-md-6">
                                 <label for="{{ form.date.id_for_label }}" class="fw-semibold">{{ form.date.label }}</label>
                                 {{ form.date }}
-                                <div class="text-danger"> {{form.date.errors }} </div>
-                                
+                                <div class="text-danger">{{ form.date.errors }}</div>
                             </div>
-                            <div class="form-group">
-                               <label for="{{ form.notes.id_for_label }}" class="fw-semibold">{{ form.notes.label }}</label>
-                               {{ form.notes }}
-                               <div class="text-danger"> {{form.notes.errors }} </div>
-                           </div> 
-                                               </div> <!-- Prénom et Nom sur la même ligne -->
-                        {% comment %} <div class="row">
-                            <div class="col-md-6">
-                                <label for="{{ form.first_name.id_for_label }}" class="fw-semibold">{{ form.first_name.label }}</label>
-                                {{ form.first_name }}
-                            </div>
-                            <div class="col-md-6">
-                                <label for="{{ form.last_name.id_for_label }}" class="fw-semibold">{{ form.last_name.label }}</label>
-                                {{ form.last_name }}
-                            </div>
-                        </div> {% endcomment %}
-                        <!-- Passwords sur la même ligne -->
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.notes.id_for_label }}" class="fw-semibold">{{ form.notes.label }}</label>
+                            {{ form.notes }}
+                            <div class="text-danger">{{ form.notes.errors }}</div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="{{ form.duration.id_for_label }}" class="fw-semibold">{{ form.duration.label }}</label>
                                 {{ form.duration }}
-                            <div class="text-danger"> {{form.duration.errors }} </div>
-
+                                <div class="text-danger">{{ form.duration.errors }}</div>
                             </div>
                             <div class="col-md-6">
                                 <label for="{{ form.payment_amount.id_for_label }}" class="fw-semibold">{{ form.payment_amount.label }}</label>
                                 {{ form.payment_amount }}
-                            <div class="text-danger"> {{form.payment_amount.errors }} </div>
-
+                                <div class="text-danger">{{ form.payment_amount.errors }}</div>
                             </div>
                         </div>
-                        {% comment %} <div class="form-group">
-                            <label for="{{ form.address.id_for_label }}" class="fw-semibold">{{ form.address.label }}</label>
-                            {{ form.address }}
-                            <div class="text-danger"> {{form.address.errors }} </div>
-
-                        </div> {% endcomment %}
-
 
                         <button type="submit" class="btn btn-primary w-100 text-white py-2 rounded-pill shadow-sm mt-3">
                             Enregistrer
                         </button>
                     </form>
 
-                    {% comment %} <div class="text-center mt-3">
-                        <p>Déjà inscrit ?
-                            <a href="{% url 'utilisateur:login' %}" class="text-primary fw-bold">Connectez-vous</a>
-                        </p>
-                    </div> {% endcomment %}
                 </div>
             </div>
         </div>

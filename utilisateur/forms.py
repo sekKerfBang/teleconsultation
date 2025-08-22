@@ -18,14 +18,16 @@ class CustomAuthenticationForm(AuthenticationForm):
         max_length=254,
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': "Entrez votre nom d'utilisateur"
+            'placeholder': "Entrez votre nom d'utilisateur",
+            'style': 'background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 15px; padding-left:10px;'
         })
     )
     password = forms.CharField(
         label="Mot de passe",
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Entrez votre mot de passe'
+            'placeholder': 'Entrez votre mot de passe',
+            'style': 'background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 15px;padding-left:10px;'
         })
     )
 
@@ -94,13 +96,17 @@ class PatientRegistrationForm(UserCreationForm):
                     'class': 'form-control form-control-lg rounded-3',
                     'placeholder': placeholders.get(name, ''),
                     'rows': 3,
-                    'style': 'background-color: #f9f9f9; border: 1px solid #ddd;'
+                    # 'style': 'background-color: #f9f9f9; border: 1px solid #ddd;'
+                    'style': 'background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 15px; padding-left:15px;'
+                    
                 })
             else:
                 field.widget.attrs.update({
                     'class': 'form-control form-control-lg rounded-3',
                     'placeholder': placeholders.get(name, ''),
-                    'style': 'background-color: #f9f9f9; border: 1px solid #ddd;'
+                    # 'style': 'background-color: #f9f9f9; border: 1px solid #ddd;'
+            'style': 'background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 15px; padding-left:15px;'
+                    
                 }) 
         
 
@@ -137,7 +143,9 @@ class DoctorRegistrationForm(UserCreationForm):
             field.widget.attrs.update({
                 'class': 'form-control form-control-lg rounded-3',
                 'placeholder': placeholders.get(field_name, ''),
-                'style': 'background-color: #f9f9f9; border: 1px solid #ddd;'
+                # 'style': 'background-color: #f9f9f9; border: 1px solid #ddd;'
+            'style': 'background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 15px; padding-left:15px;'
+                
             })    
 
 # Formulaire pour les consultations

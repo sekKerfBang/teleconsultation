@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="card p-5 shadow-lg border-0 position-relative" style="border-radius: 10px; background-color: #ffffff; z-index: 10;">
+                <div class="card p-5 shadow-lg border-0 position-relative" style="border-radius: 10px; background-color: #ffffff; z-index:10;">
                     <h2 class="text-center mb-4" style="color: #1e293b;">Connexion</h2>
                     
                     <!-- Messages Display -->
@@ -22,7 +22,7 @@
                     {% endif %}
                     
                     
-                    <!-- Formulaire -->
+                
                     <form method="post" novalidate>   
                         {% csrf_token %}
                         <!-- Username -->
@@ -41,13 +41,13 @@
                             {% if form.password.errors %}
                                 <div class="text-danger fs-7 mt-1">{{ form.password.errors }}</div>
                             {% endif %}
-                            <span onclick="togglePassword()" style="position:absolute; right:15px; top:50%; transform: translateY(-50%); cursor:pointer; z-index: 20;">
+                            <span onclick="togglePassword()" style="position:absolute; right:15px; top:50%; transform: translateY(10%); cursor:pointer; z-index: 20;">
                                 <iconify-icon icon="mdi:eye-outline"></iconify-icon>
                             </span>
                         </div>
 
                         <!-- Bouton -->
-                        <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+                        <button type="submit" class="btn btn-primary w-100 text-white   ">Se connecter</button>
                     </form>
 
                     <!-- Liens -->
